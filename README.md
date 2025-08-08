@@ -31,13 +31,14 @@ On the `Pickup` page, users can specify their preferences (product categories an
 1. Filter by preferred categories.
 1. Extract price midpoint  `(min price + max price) / 2`.
 1. Calculate score for each product.
-    - price score = $\text{max}\left(0, 1 - \dfrac{|\text{price}_{\text{product}} - \text{price}_{\text{midpoint}}|}{\text{price}_{\text{max}} - \text{price}_{\text{min}}}\right)$ (Inverse normalised deviation measure that provides closer prices with higher scores)
-    - rating score = $\dfrac{\text{product's score}}{5} $ (Normalised)
-    - review score = $\dfrac{\text{product's review counts}}{\text{max review counts}}$
+    - price_score = $\max\left(0, 1 - \dfrac{|price_{product} - price_{midpoint}|}{price_{max} - price_{min}}\right)$ (Inverse normalised deviation measure that provides closer prices with higher scores)
+    - rating_score = $\dfrac{score_{product}}{5}$ (Normalised)
+    - review_score = $\dfrac{count_{product}}{max(count)}$
 1. Combine the scores with assigned weights (rating: 50%, price: 30%, reviews: 20%):
-    $$
-    \text{score}_{\text{product}} = 0.5 \times \text{rating score} + 0.3 \times \text{price score} + 0.2 \times \text{review score}
-    $$
+
+    `product_score = 0.5 × rating_score + 0.3 × price_score + 0.2 × review_score`
+
+
 1. Sort the filtered products in descending order of scores, then return 3 top products as recommendations.
 
 
